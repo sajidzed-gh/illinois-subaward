@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="SubawardReader.App/SubawardReader.App.csproj" />
+  <Project Path="SubawardReader.Tests/SubawardReader.Tests.csproj" />
+</Solution>
