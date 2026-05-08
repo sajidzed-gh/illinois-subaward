@@ -1,10 +1,10 @@
-//using SubawardReader.Core;
+
 using SubawardBusiness.Core;
 
-// ─────────────────────────────────────────────────────────────────────────────
+// ------------------------------------------------------------------------------
 // Usage:  SubawardReader <folder-path>
 //         SubawardReader          (defaults to the current directory)
-// ─────────────────────────────────────────────────────────────────────────────
+// ------------------------------------------------------------------------------
 
 var folderPath = args.Length > 0 ? args[0] : Directory.GetCurrentDirectory();
 
@@ -27,7 +27,7 @@ if (xlsxFiles.Length == 0)
 var parser = new SubawardExcelParser();
 var allRecords = new List<SubawardRecord>();
 
-// ── Per-file output ─────────────────────────────────────────────────────────
+// Per-file output -----------------------------------------------------
 foreach (var file in xlsxFiles)
 {
     var records = parser.Parse(file);
@@ -49,7 +49,7 @@ foreach (var file in xlsxFiles)
     }
 }
 
-// ── Summary across all files ─────────────────────────────────────────────────
+// Summary across all files -----------------------------------------------------
 Console.WriteLine();
 Console.WriteLine(new string('=', 60));
 Console.WriteLine("  SUMMARY - Total Subaward Amounts by Recipient");

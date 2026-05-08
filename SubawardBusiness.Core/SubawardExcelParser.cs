@@ -1,5 +1,4 @@
 ﻿using ClosedXML.Excel;
-//using SubawardReader.Core;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,7 +29,12 @@ namespace SubawardBusiness.Core
 
                 if (cellB.StartsWith("Subaward:", StringComparison.OrdinalIgnoreCase))
                 {
-                    var name = row.Cell(3).Value.ToString().Trim();
+                    // Try getting name from the part after "Subaward:" in column B id exists
+                    var afterColon = cellB["Subaward:".Length..].Trim();
+
+                    
+
+                    var name = !string.IsNullOrWhiteSpace(afterColon) ? afterColon : row.Cell(3).Value.ToString().Trim();
                 
 
                     if (string.IsNullOrWhiteSpace(name))
@@ -40,7 +44,7 @@ namespace SubawardBusiness.Core
                     if (totalColIndex > 0)
                     {
                         var cellValue = row.Cell(totalColIndex).Value;
-                        //if (cellValue != null && decimal.TryParse(cellValue.ToString(), out var parsed))
+                        
                         if (row.Cell(totalColIndex) != null && decimal.TryParse(cellValue.ToString(), out var parsed))
                             amount = parsed;
                     }
@@ -59,7 +63,7 @@ namespace SubawardBusiness.Core
                     .Any(c => c.Value.ToString().Equals("Total", StringComparison.OrdinalIgnoreCase)));
 
             if (headerRow == null)
-                return 6; // fallback to column F
+                return 6; 
 
             return headerRow.CellsUsed()
                 .First(c => c.Value.ToString().Equals("Total", StringComparison.OrdinalIgnoreCase))
