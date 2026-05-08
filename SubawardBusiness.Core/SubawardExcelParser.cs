@@ -1,4 +1,5 @@
 ﻿using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Spreadsheet;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -44,9 +45,12 @@ namespace SubawardBusiness.Core
                     if (totalColIndex > 0)
                     {
                         var cellValue = row.Cell(totalColIndex).Value;
-                        
+
                         if (row.Cell(totalColIndex) != null && decimal.TryParse(cellValue.ToString(), out var parsed))
+                        {
                             amount = parsed;
+                            amount += GetExemptRowAmount(worksheet, row, totalColIndex);
+                        }
                     }
 
                     results.Add(new SubawardRecord(fileName, name, amount));
@@ -69,5 +73,29 @@ namespace SubawardBusiness.Core
                 .First(c => c.Value.ToString().Equals("Total", StringComparison.OrdinalIgnoreCase))
                 .Address.ColumnNumber;
         }
+
+
+        // Check if next row is the Exempt row and return the exempt total
+        private static decimal GetExemptRowAmount(IXLWorksheet worksheet, IXLRow row ,int totalColIndex)
+        {
+
+            var nextRow = worksheet.Row(row.RowNumber() + 1);
+            var nextRowLabel = nextRow.Cell(2).Value.ToString();
+            
+
+            if (nextRowLabel.Contains("Exempt Subaward", StringComparison.OrdinalIgnoreCase))
+                return GetTotalAmount(nextRow, totalColIndex);
+            return 0;
+
+            }
+
+        private static decimal GetTotalAmount(IXLRow row, int totalColIndex)
+        {
+            var cell = row.Cell(totalColIndex);
+            if (decimal.TryParse(cell.Value.ToString(), out var amount))
+                return amount;
+            return 0;
+        }
+
     }
 }
