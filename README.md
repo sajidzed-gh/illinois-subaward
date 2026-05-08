@@ -3,6 +3,15 @@
 A .NET 10 console application that reads budget spreadsheets and extracts subaward information.
 
 ## Usage
+
+Navigate to the solution folder:
+
+```bash
+cd C:\path\to\SubawardReader
+```
+
+Run:
+
 ```bash
 dotnet run --project SubawardReader.App -- "C:\path\to\your\spreadsheets"
 ```
