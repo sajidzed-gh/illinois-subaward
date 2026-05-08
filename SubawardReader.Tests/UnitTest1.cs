@@ -13,7 +13,7 @@ public class SubawardExcelParserTests
         Path.Combine(TestDataPath, name);
 
     // ------------------------------------------------------------------------------
-    // Required test: confirms exactly four recipients in Example1 and that
+    // Required test: confirms exactly four recipients 
     // Indiana, Mayo, Purdue, and Florida are all present.
     // ------------------------------------------------------------------------------
     [Fact]
