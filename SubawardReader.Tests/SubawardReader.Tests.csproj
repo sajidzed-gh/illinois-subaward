@@ -10,6 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="xunit.v3" Version="3.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SubawardBusiness.Core\SubawardBusiness.Core.csproj" />
     <ProjectReference Include="..\SubawardReader.Core\SubawardReader.Core.csproj" />
   </ItemGroup>
 

@@ -1,7 +1,7 @@
 namespace SubawardBusiness.Core;
 
 /// <summary>
-/// Represents a single subaward entry parsed from a budget spreadsheet.
+/// Represents a single subaward entry parsed from a spreadsheet.
 /// </summary>
 public record SubawardRecord(
     string FileName,
