@@ -31,7 +31,17 @@ public class SubawardExcelParserTests
         Assert.Contains("Florida", names);
     }
 
-   
+    [Fact]
+    public void Example2_No_Subaward()
+    {
+
+        var parser = new SubawardExcelParser();
+        var records = parser.Parse(FilePath("SubawardBudgetExampleZero.xlsx"));
+
+        Assert.Empty(records);
+            
+        
+    }
 
     
     
